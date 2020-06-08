@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<link rel="stylesheet" type="text/css" href="dayoftheweekstyle.css">
+</head>
+<body>
+	<form class="card" onsubmit="dayAlgorithm()">
+		<div class="cardless">
+		<input class="cent" type="text" name="" placeholder="year of birth i.e 1998">
+		<input class="mymonth" type="text" name="" placeholder="Your month of birth i.e February">
+		<input  class="day" type="text" name="" placeholder="Your day i.e 23">
+		<input type="submit" name="" onclick="dayAlgorithm()">
+		<h1></h1>
+		</div>
+	</form>
+	<script type="text/javascript">
+	
+
+	let cent = document.getElementsByClassName("cent");
+	console.log(cent);
+    let month = document.querySelector("mymonth");
+    let day = document.querySelector("day");
+    let result = document.querySelector("h1");
+    
+    function dayAlgorithm() {
+    let collectCentury = cent.value;
+    console.log(collectCentury);
+    let checkCentury = collectCentury.slice(0,2);
+    
+    let year = (Number(collectCentury.slice(2,4)));
+    
+    let calcday = Math.floor(Number((year + (year/4))%7));
+    
+    if ((checkCentury === 17) || (checkCentury === 21)) {
+            calcday += 4 
+        }else if ((checkCentury === 18) || (checkCentury ===22)) {
+                calcday += 2
+            }else if(checkCentury === 20){
+                    calcday += 6
+                }else{
+                        calcday += 0
+    };
+    
+    let arrMonth = [
+        {month:"January", number:0},
+        {month:"February", number:3},
+        {month:"March", number:3}, 
+        {month:"April", number:6}, 
+        {month:"May", number:1},
+        {month:"June", number:4},
+        {month:"July", number:6}, 
+        {month:"August", number:2}, 
+        {month:"September", number:5}, 
+        {month:"October", number:0},
+        {month:"November", number:3}, 
+        {month:"December", number:5},
+        ];
+    let month1 = month.value;
+    let selectedMonth = arrMonth.filter((item) =>{
+        return item.month === month1;
+    });
+    let monthcode = selectedMonth[0].number;
+    
+    let day = day.value;
+    let youArebornOn = [
+        "Sunday","Monday","Tuesday", "Wednesday",
+        "Thursday", "Friday","Saturday"
+    ];
+    
+    let numOfDayCalc = ((calcday + monthcode + day)%7);
+    
+    let brainCalender = youArebornOn[numOfDayCalc];
+    alert(brainCalender)
+    };
+	</script>
+</body>
+</html> 
